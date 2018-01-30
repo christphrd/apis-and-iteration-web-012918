@@ -19,10 +19,10 @@ def get_character_movies_from_api(character)
   until correct_results
     all_characters = RestClient.get(url)
     character_hash = JSON.parse(all_characters)
-    all_results_arr = character_hash["results"]
-    all_results_arr.each do |result|
+    page_results_arr = character_hash["results"]
+    page_results_arr.each do |result|
       if result["name"].downcase == character
-        return correct_results = result["films"]
+        return result["films"]
       end
     end
     url = character_hash["next"]
